@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const sortOrder = searchParams.get("sortOrder") || "desc";
 
     // Construire les conditions de filtrage
-    const where: any = {};
+    const where: Record<string, unknown> = {};
 
     if (search) {
       where.OR = [
@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Construire l'ordre de tri
-    const orderBy: any = {};
+    const orderBy: Record<string, unknown> = {};
     orderBy[sortBy] = sortOrder;
 
     const news = await prisma.news.findMany({

@@ -5,7 +5,22 @@ import { StarIcon, UserIcon, CalendarIcon, EnvelopeIcon } from "@heroicons/react
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-export default function AdminUsersClient({ users }: { users: any[] }) {
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  image: string | null;
+  discordId: string | null;
+  isAdmin: boolean;
+  isBanned: boolean;
+  createdAt: string;
+  _count: {
+    articles: number;
+    news: number;
+  };
+}
+
+export default function AdminUsersClient({ users }: { users: User[] }) {
   const [loadingId, setLoadingId] = useState<string | null>(null);
   const router = useRouter();
 
@@ -18,7 +33,7 @@ export default function AdminUsersClient({ users }: { users: any[] }) {
             <th className="text-left py-3 px-4">Email</th>
             <th className="text-left py-3 px-4">Rôle</th>
             <th className="text-left py-3 px-4">Contributions</th>
-            <th className="text-left py-3 px-4">Date d'inscription</th>
+            <th className="text-left py-3 px-4">Date d&apos;inscription</th>
             <th className="text-left py-3 px-4">Actions</th>
           </tr>
         </thead>

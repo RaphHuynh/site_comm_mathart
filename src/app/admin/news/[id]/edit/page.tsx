@@ -53,7 +53,7 @@ export default function EditNewsPage({ params }: { params: { id: string } }) {
         }
       } catch (error) {
         console.error("Erreur:", error);
-        alert("Erreur lors du chargement de l'actualité");
+        alert("Erreur lors du chargement de l&apos;actualité");
         router.push("/admin/news");
       } finally {
         setLoading(false);
@@ -90,7 +90,7 @@ export default function EditNewsPage({ params }: { params: { id: string } }) {
       }
     } catch (error) {
       console.error("Erreur:", error);
-      alert("Erreur lors de la modification de l'actualité");
+      alert("Erreur lors de la modification de l&apos;actualité");
     } finally {
       setSaving(false);
     }
@@ -133,8 +133,8 @@ export default function EditNewsPage({ params }: { params: { id: string } }) {
           <ArrowLeft className="mr-2 h-4 w-4" />
           Retour aux actualités
         </Link>
-        <h1 className="text-3xl font-bold">Modifier l'Actualité</h1>
-        <p className="text-gray-600">Modifiez les informations de l'actualité</p>
+        <h1 className="text-3xl font-bold">Modifier l&apos;Actualité</h1>
+        <p className="text-gray-600">Modifiez les informations de l&apos;actualité</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -152,7 +152,7 @@ export default function EditNewsPage({ params }: { params: { id: string } }) {
                     id="title"
                     value={formData.title}
                     onChange={(e) => handleInputChange("title", e.target.value)}
-                    placeholder="Titre de l'actualité"
+                    placeholder="Titre de l&apos;actualité"
                     required
                   />
                 </div>
@@ -174,7 +174,7 @@ export default function EditNewsPage({ params }: { params: { id: string } }) {
                     id="content"
                     value={formData.content}
                     onChange={(e) => handleInputChange("content", e.target.value)}
-                    placeholder="Contenu de l'actualité..."
+                    placeholder="Contenu de l&apos;actualité..."
                     rows={15}
                     required
                   />
@@ -241,8 +241,8 @@ export default function EditNewsPage({ params }: { params: { id: string } }) {
                   </div>
                 ) : (
                   <div className="text-center py-8 text-gray-500">
-                    <p>Aperçu de l'actualité</p>
-                    <p className="text-sm mt-2">Commencez à écrire pour voir l'aperçu</p>
+                    <p>Aperçu de l&apos;actualité</p>
+                    <p className="text-sm mt-2">Commencez à écrire pour voir l&apos;aperçu</p>
                   </div>
                 )}
               </CardContent>

@@ -1,14 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Navigation } from "@/components/layout/Navigation";
-import { Users, MessageCircle, Calendar, User as UserIcon, Crown, Loader2, FileText, Newspaper, Star } from "lucide-react";
+import { Users, Calendar, Crown, Loader2, FileText, Newspaper, Star } from "lucide-react";
 
 interface User {
   id: string;
@@ -29,7 +27,6 @@ interface Stats {
 }
 
 export default function CommunityPage() {
-  const { data: session } = useSession();
   const [users, setUsers] = useState<User[]>([]);
   const [stats, setStats] = useState<Stats>({ totalArticles: 0, totalEvents: 0 });
   const [loading, setLoading] = useState(true);
@@ -51,7 +48,7 @@ export default function CommunityPage() {
         const articlesResponse = await fetch("/api/articles");
         if (articlesResponse.ok) {
           const articlesData = await articlesResponse.json();
-          const publishedArticles = articlesData.filter((article: any) => article.published);
+          const publishedArticles = articlesData.filter((article: unknown) => (article as { published: boolean }).published);
           
           // Charger les événements
           const eventsResponse = await fetch("/api/events");

@@ -4,7 +4,7 @@ import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 // GET - Récupérer tous les événements
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const events = await prisma.event.findMany({
       include: {
@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
     try {
       parsedDate = new Date(date);
       if (isNaN(parsedDate.getTime())) throw new Error('Date invalide');
-    } catch (e) {
+    } catch {
       return NextResponse.json(
         { error: "Format de date invalide" },
         { status: 400 }

@@ -87,7 +87,7 @@ export function MarkdownRenderer({ content, className = "" }: MarkdownRendererPr
             </li>
           ),
           // Personnalisation des blocs de code
-          code: ({ node, inline, className, children, ...props }) => {
+          code: ({ inline, className, children, ...props }) => {
             const match = /language-(\w+)/.exec(className || '');
             return !inline ? (
               <pre className="bg-gray-100 border border-gray-200 rounded-lg p-4 overflow-x-auto mb-4">

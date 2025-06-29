@@ -6,7 +6,7 @@ export function LatexGuide() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Guide d'utilisation LaTeX</CardTitle>
+        <CardTitle>Guide d&apos;utilisation LaTeX</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div>

@@ -15,7 +15,6 @@ import {
   Calendar, 
   User, 
   Tag,
-  Eye,
   EyeOff
 } from 'lucide-react';
 

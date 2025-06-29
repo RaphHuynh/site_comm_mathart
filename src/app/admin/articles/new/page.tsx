@@ -82,7 +82,7 @@ export default function NewArticlePage() {
       });
 
       if (response.ok) {
-        const article = await response.json();
+        await response.json();
         router.push(`/admin/articles`);
       } else {
         const error = await response.json();
@@ -90,7 +90,7 @@ export default function NewArticlePage() {
       }
     } catch (error) {
       console.error('Erreur lors de la création:', error);
-      alert('Erreur lors de la création de l\'article');
+      alert('Erreur lors de la création de l&apos;article');
     } finally {
       setLoading(false);
     }
@@ -149,7 +149,7 @@ export default function NewArticlePage() {
               <CardHeader>
                 <CardTitle>Contenu</CardTitle>
                 <p className="text-sm text-gray-600">
-                  Utilisez la barre d'outils pour formater votre texte et insérer des formules LaTeX
+                  Utilisez la barre d&apos;outils pour formater votre texte et insérer des formules LaTeX
                 </p>
               </CardHeader>
               <CardContent>
@@ -250,7 +250,7 @@ export default function NewArticlePage() {
                   <Label htmlFor="published">Publier immédiatement</Label>
                 </div>
                 <p className="text-sm text-gray-500 mt-2">
-                  Si désactivé, l'article sera sauvegardé comme brouillon
+                  Si désactivé, l&apos;article sera sauvegardé comme brouillon
                 </p>
               </CardContent>
             </Card>
@@ -269,7 +269,7 @@ export default function NewArticlePage() {
               ) : (
                 <>
                   <Save className="mr-2 h-4 w-4" />
-                  Créer l'article
+                  Créer l&apos;article
                 </>
               )}
             </Button>

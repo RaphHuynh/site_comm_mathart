@@ -5,6 +5,17 @@ import { Navigation } from "@/components/layout/Navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
+interface Event {
+  id: number;
+  title: string;
+  description: string;
+  date: string;
+  location: string | null;
+  author?: {
+    name: string;
+  };
+}
+
 function Footer() {
   return (
     <footer className="mt-12 py-6 text-center text-gray-500 text-sm border-t bg-white">
@@ -14,7 +25,7 @@ function Footer() {
 }
 
 export default function EventsPage() {
-  const [events, setEvents] = useState<any[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -199,7 +210,7 @@ export default function EventsPage() {
               </h3>
               <p className="text-gray-600 mb-6 text-lg">
                 Rejoignez notre communauté pour ne manquer aucun événement passionnant 
-                et rencontrer d'autres passionnés.
+                et rencontrer d&apos;autres passionnés.
               </p>
               <Badge className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-0 px-6 py-2 text-base">
                 <Calendar className="mr-2 h-4 w-4" />

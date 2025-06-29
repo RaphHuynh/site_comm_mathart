@@ -147,7 +147,7 @@ export default function NewsPage() {
                 </div>
                 <h3 className="text-lg font-medium text-gray-900 mb-2">Aucune actualité</h3>
                 <p className="text-gray-500 mb-6">
-                  Aucune actualité n'a encore été publiée.
+                  Aucune actualité n&apos;a encore été publiée.
                 </p>
                 {session?.user?.isAdmin && (
                   <Link href="/admin/news/new">
@@ -217,7 +217,7 @@ export default function NewsPage() {
                     {/* Bouton lire */}
                     <Link href={`/news/${newsItem.id}`}>
                       <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 group-hover:shadow-lg transition-all duration-300">
-                        Lire l'actualité
+                        Lire l&apos;actualité
                         <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </Link>

@@ -8,7 +8,6 @@ import {
   LayoutDashboard,
   FileText,
   Users,
-  Settings,
   BarChart3,
   Newspaper,
   MessageCircle,

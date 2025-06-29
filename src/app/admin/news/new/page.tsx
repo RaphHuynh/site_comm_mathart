@@ -48,7 +48,7 @@ export default function NewNewsPage() {
       }
     } catch (error) {
       console.error("Erreur:", error);
-      alert("Erreur lors de la création de l'actualité");
+      alert("Erreur lors de la création de l&apos;actualité");
     } finally {
       setLoading(false);
     }
@@ -78,7 +78,7 @@ export default function NewNewsPage() {
           <div className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>Informations de l'actualité</CardTitle>
+                <CardTitle>Informations de l&apos;actualité</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
@@ -87,7 +87,7 @@ export default function NewNewsPage() {
                     id="title"
                     value={formData.title}
                     onChange={(e) => handleInputChange("title", e.target.value)}
-                    placeholder="Titre de l'actualité"
+                    placeholder="Titre de l&apos;actualité"
                     required
                   />
                 </div>
@@ -98,7 +98,7 @@ export default function NewNewsPage() {
                     id="excerpt"
                     value={formData.excerpt}
                     onChange={(e) => handleInputChange("excerpt", e.target.value)}
-                    placeholder="Court résumé de l'actualité (optionnel)"
+                    placeholder="Court résumé de l&apos;actualité (optionnel)"
                     rows={3}
                   />
                 </div>
@@ -109,7 +109,7 @@ export default function NewNewsPage() {
                     id="content"
                     value={formData.content}
                     onChange={(e) => handleInputChange("content", e.target.value)}
-                    placeholder="Contenu de l'actualité..."
+                    placeholder="Contenu de l&apos;actualité..."
                     rows={15}
                     required
                   />
@@ -135,7 +135,7 @@ export default function NewNewsPage() {
                 ) : (
                   <>
                     <Save className="mr-2 h-4 w-4" />
-                    Créer l'actualité
+                    Créer l&apos;actualité
                   </>
                 )}
               </Button>
@@ -176,8 +176,8 @@ export default function NewNewsPage() {
                   </div>
                 ) : (
                   <div className="text-center py-8 text-gray-500">
-                    <p>Aperçu de l'actualité</p>
-                    <p className="text-sm mt-2">Commencez à écrire pour voir l'aperçu</p>
+                    <p>Aperçu de l&apos;actualité</p>
+                    <p className="text-sm mt-2">Commencez à écrire pour voir l&apos;aperçu</p>
                   </div>
                 )}
               </CardContent>

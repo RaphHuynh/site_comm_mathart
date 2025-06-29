@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     const sortOrder = searchParams.get('sortOrder') || 'desc';
     const published = searchParams.get('published');
 
-    const where: any = {};
+    const where: Record<string, unknown> = {};
 
     // Filtre de recherche
     if (search) {
@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Construire le tri
-    const orderBy: any = {};
+    const orderBy: Record<string, unknown> = {};
     if (sortBy === 'author') {
       orderBy.author = { name: sortOrder };
     } else if (sortBy === 'category') {

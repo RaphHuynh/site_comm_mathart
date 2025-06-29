@@ -33,7 +33,7 @@ export default async function AdminDashboard() {
     <div className="space-y-6 p-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Tableau de bord</h1>
-        <p className="text-gray-600">Vue d'ensemble de votre site communautaire</p>
+        <p className="text-gray-600">Vue d&apos;ensemble de votre site communautaire</p>
       </div>
 
       {/* Statistiques */}
@@ -72,7 +72,7 @@ export default async function AdminDashboard() {
           <CardContent>
             <div className="text-2xl font-bold">{newsCount}</div>
             <p className="text-xs text-muted-foreground">
-              Articles d'actualité
+              Articles d&apos;actualité
             </p>
           </CardContent>
         </Card>

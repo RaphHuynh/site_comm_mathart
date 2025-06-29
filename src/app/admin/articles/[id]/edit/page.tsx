@@ -12,7 +12,6 @@ import { HybridEditor } from "@/components/ui/hybrid-editor";
 import { FeaturedImageUpload } from "@/components/ui/featured-image-upload";
 import { useSession } from "next-auth/react";
 import { Loader2, Save, ArrowLeft } from "lucide-react";
-import Link from "next/link";
 
 interface Category {
   id: number;
@@ -50,7 +49,7 @@ export default function EditArticlePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const params = useParams();
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [article, setArticle] = useState<Article | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -75,7 +74,7 @@ export default function EditArticlePage() {
     // Charger l'article et les catégories
     fetchArticle();
     fetchCategories();
-  }, [session, status, router, params.id]);
+  }, [session, status, router, params.id, fetchArticle]);
 
   const fetchArticle = async () => {
     try {
@@ -212,7 +211,7 @@ export default function EditArticlePage() {
               <CardHeader>
                 <CardTitle>Contenu</CardTitle>
                 <p className="text-sm text-gray-600">
-                  Utilisez la barre d'outils pour formater votre texte et insérer des formules LaTeX
+                  Utilisez la barre d&apos;outils pour formater votre texte et insérer des formules LaTeX
                 </p>
               </CardHeader>
               <CardContent>
@@ -313,7 +312,7 @@ export default function EditArticlePage() {
                   <Label htmlFor="published">Publier immédiatement</Label>
                 </div>
                 <p className="text-sm text-gray-500 mt-2">
-                  Si désactivé, l'article sera sauvegardé comme brouillon
+                  Si désactivé, l&apos;article sera sauvegardé comme brouillon
                 </p>
               </CardContent>
             </Card>

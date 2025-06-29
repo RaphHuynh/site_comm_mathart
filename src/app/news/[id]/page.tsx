@@ -7,7 +7,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { Navigation } from "@/components/layout/Navigation";
 import { HybridRenderer } from "@/components/ui/hybrid-renderer";
 import { ArrowLeft, Edit, Trash2, Calendar, User, Loader2 } from "lucide-react";
@@ -186,7 +185,7 @@ export default function NewsPage({ params }: { params: { id: string } }) {
         {/* Informations sur l'auteur */}
         <Card>
           <CardHeader>
-            <CardTitle>À propos de l'auteur</CardTitle>
+            <CardTitle>À propos de l&apos;auteur</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-center space-x-4">

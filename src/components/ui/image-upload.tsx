@@ -2,14 +2,11 @@
 
 import { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
   Upload, 
   X, 
-  Image as ImageIcon, 
-  Loader2,
-  Trash2
+  Loader2
 } from "lucide-react";
 
 interface ImageUploadProps {
@@ -52,7 +49,7 @@ export function ImageUpload({
 
       // Vérifier le type
       if (!file.type.startsWith('image/')) {
-        alert(`Le fichier ${file.name} n'est pas une image valide.`);
+        alert(`Le fichier ${file.name} n&apos;est pas une image valide.`);
         continue;
       }
 
@@ -89,14 +86,14 @@ export function ImageUpload({
           ));
         } else {
           const error = await response.json();
-          alert(`Erreur lors de l'upload de ${file.name}: ${error.error}`);
+          alert(`Erreur lors de l&apos;upload de ${file.name}: ${error.error}`);
           
           // Supprimer l'image en erreur
           setImages(prev => prev.filter(img => img.id !== imageId));
         }
       } catch (error) {
         console.error('Erreur upload:', error);
-        alert(`Erreur lors de l'upload de ${file.name}`);
+        alert(`Erreur lors de l&apos;upload de ${file.name}`);
         
         // Supprimer l'image en erreur
         setImages(prev => prev.filter(img => img.id !== imageId));

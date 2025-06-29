@@ -7,12 +7,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
 import { 
   Plus, 
   Edit, 
   Trash2, 
-  Palette, 
   FileText, 
   Loader2,
   Eye,
@@ -195,7 +193,7 @@ export default function AdminCategoriesPage() {
       <div className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-3xl font-bold">Gestion des Catégories</h1>
-          <p className="text-gray-600">Créez et gérez les catégories d'articles</p>
+          <p className="text-gray-600">Créez et gérez les catégories d&apos;articles</p>
         </div>
         <Button onClick={() => setShowForm(true)}>
           <Plus className="mr-2 h-4 w-4" />

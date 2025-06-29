@@ -155,7 +155,7 @@ export function HybridRenderer({ content, className = "" }: HybridRendererProps)
                 </li>
               ),
               // Personnalisation des blocs de code
-              code: ({ node, inline, className, children, ...props }) => {
+              code: ({ inline, className, children, ...props }) => {
                 const match = /language-(\w+)/.exec(className || '');
                 return !inline ? (
                   <pre>

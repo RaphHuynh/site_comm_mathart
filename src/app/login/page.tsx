@@ -100,7 +100,7 @@ export default function LoginPage() {
               <p>
                 En vous connectant, vous acceptez nos{" "}
                 <a href="#" className="text-blue-600 hover:underline">
-                  conditions d'utilisation
+                  conditions d&apos;utilisation
                 </a>{" "}
                 et notre{" "}
                 <a href="#" className="text-blue-600 hover:underline">

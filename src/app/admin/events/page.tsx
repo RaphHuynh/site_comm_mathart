@@ -6,8 +6,16 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Trash2, Calendar } from "lucide-react";
 
+interface Event {
+  id: number;
+  title: string;
+  description: string;
+  date: string;
+  location: string | null;
+}
+
 export default function AdminEventsPage() {
-  const [events, setEvents] = useState<any[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({ title: "", description: "", date: "", location: "" });
   const [submitting, setSubmitting] = useState(false);

@@ -165,7 +165,7 @@ export async function PUT(
     const imagesString = images && images.length > 0 ? images.join(',') : null;
 
     // Préparer les données de mise à jour
-    const updateData: any = {};
+    const updateData: Record<string, unknown> = {};
     
     if (title !== undefined) updateData.title = title;
     if (content !== undefined) updateData.content = content;

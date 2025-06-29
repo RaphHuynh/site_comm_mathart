@@ -2,12 +2,10 @@
 
 import { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
   Upload, 
   X, 
-  Image as ImageIcon, 
   Loader2
 } from "lucide-react";
 
@@ -37,7 +35,7 @@ export function FeaturedImageUpload({
 
     // Vérifier le type
     if (!file.type.startsWith('image/')) {
-      alert(`Le fichier n'est pas une image valide.`);
+      alert(`Le fichier n&apos;est pas une image valide.`);
       return;
     }
 
@@ -62,7 +60,7 @@ export function FeaturedImageUpload({
       }
     } catch (error) {
       console.error('Erreur upload:', error);
-      alert("Erreur lors de l'upload de l'image");
+      alert("Erreur lors de l&apos;upload de l&apos;image");
     } finally {
       setUploading(false);
     }
@@ -136,7 +134,7 @@ export function FeaturedImageUpload({
                     Formats acceptés: JPG, PNG, GIF, WebP (max {maxSize}MB)
                   </p>
                   <p className="text-sm text-gray-500">
-                    Cette image sera utilisée comme illustration principale de l'article
+                    Cette image sera utilisée comme illustration principale de l&apos;article
                   </p>
                 </div>
               )}

@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Navigation } from "@/components/layout/Navigation";
 import { SearchFilters, FilterState } from "@/components/ui/search-filters";
-import { Calendar, User, Tag, Eye, FileText, Loader2, ArrowRight, Clock } from "lucide-react";
+import { Calendar, User, Tag, Eye, FileText, Loader2, ArrowRight } from "lucide-react";
 
 interface Article {
   id: number;
@@ -104,7 +104,7 @@ export default function ArticlesPage() {
 
     // Tri
     filteredData.sort((a, b) => {
-      let aValue: any, bValue: any;
+      let aValue: string | Date, bValue: string | Date;
       
       switch (filters.sortBy) {
         case 'title':
@@ -179,7 +179,7 @@ export default function ArticlesPage() {
             Articles <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">MathArt</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Découvrez nos articles sur les sciences, la technologie, l'histoire et l'art
+            Découvrez nos articles sur les sciences, la technologie, l&apos;histoire et l&apos;art
           </p>
         </div>
 
@@ -307,7 +307,9 @@ export default function ArticlesPage() {
                         {article.author.name?.charAt(0).toUpperCase()}
                       </AvatarFallback>
                     </Avatar>
-                    <span className="text-xs text-gray-600">{article.author.name}</span>
+                    <p className="text-sm text-gray-500">
+                      {article.author.name} • {new Date(article.createdAt).toLocaleDateString()}
+                    </p>
                   </div>
                   <Link href={`/articles/${article.id}`}>
                     <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 group-hover:shadow-lg transition-all duration-300 mt-2">

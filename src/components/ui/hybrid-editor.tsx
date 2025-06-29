@@ -16,9 +16,6 @@ import {
   Image as ImageIcon,
   Upload,
   Code,
-  Code2,
-  Undo,
-  Redo,
   HelpCircle
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from './card';
@@ -96,7 +93,7 @@ export function HybridEditor({ content, onChange, placeholder = "Commencez à é
         newCursorPos = start + 1 + (selectedText ? selectedText.length : 12);
         break;
       case 'image':
-        newText = `![${selectedText || 'description de l\'image'}](url)`;
+        newText = `![${selectedText || 'description de l&apos;image'}](url)`;
         newCursorPos = start + 2 + (selectedText ? selectedText.length : 25);
         break;
     }

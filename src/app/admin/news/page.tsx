@@ -1,13 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
-import { Plus, Edit, Trash2, Eye, Calendar, User } from "lucide-react";
+import { Plus, Edit, Trash2, Eye, Calendar } from "lucide-react";
 
 interface News {
   id: number;
@@ -22,7 +20,6 @@ interface News {
 }
 
 export default function AdminNewsPage() {
-  const router = useRouter();
   const [news, setNews] = useState<News[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingId, setDeletingId] = useState<number | null>(null);
@@ -67,7 +64,7 @@ export default function AdminNewsPage() {
       }
     } catch (error) {
       console.error("Erreur:", error);
-      alert("Erreur lors de la suppression de l'actualité");
+      alert("Erreur lors de la suppression de l&apos;actualité");
     } finally {
       setDeletingId(null);
     }

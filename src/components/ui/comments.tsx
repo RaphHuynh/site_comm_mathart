@@ -12,7 +12,6 @@ import {
   Reply, 
   Edit, 
   Trash2, 
-  MoreHorizontal,
   Send,
   Loader2
 } from "lucide-react";
@@ -54,7 +53,7 @@ interface CommentItemProps {
   setReplyContent: (content: string) => void;
   setEditContent: (content: string) => void;
   submitting: boolean;
-  session: any;
+  session: unknown;
 }
 
 const CommentItem = memo(({

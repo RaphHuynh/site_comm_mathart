@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const where: any = {
+    const where: Record<string, unknown> = {
       articleId: parseInt(articleId),
       parentId: null, // Seulement les commentaires parents
     };
