@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useEffect, useState } from 'react';
@@ -87,7 +88,7 @@ export function MarkdownRenderer({ content, className = "" }: MarkdownRendererPr
             </li>
           ),
           // Personnalisation des blocs de code
-          code: ({ inline, className, children, ...props }) => {
+          code: ({ inline, className, children, ...props }: any) => {
             return !inline ? (
               <pre className="bg-gray-100 border border-gray-200 rounded-lg p-4 overflow-x-auto mb-4">
                 <code className={className} {...props}>

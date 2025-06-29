@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState, useEffect, useCallback, memo } from "react";
@@ -53,7 +54,7 @@ interface CommentItemProps {
   setReplyContent: (content: string) => void;
   setEditContent: (content: string) => void;
   submitting: boolean;
-  session: unknown;
+  session: any;
 }
 
 const CommentItem = memo(({
@@ -75,9 +76,9 @@ const CommentItem = memo(({
   submitting,
   session
 }: CommentItemProps) => {
-  const isAuthor = session?.user?.id === comment.author.id;
-  const isAdmin = session?.user?.isAdmin;
-  const isLiked = comment.likes.some(like => like.userId === session?.user?.id);
+  const isAuthor = session?.user && (session.user as any).id === comment.author.id;
+  const isAdmin = session?.user && (session.user as any).isAdmin;
+  const isLiked = comment.likes.some(like => like.userId === (session?.user && (session.user as any).id));
 
   return (
     <div className={`${isReply ? 'ml-8 border-l-2 border-gray-200 pl-4' : ''}`}>

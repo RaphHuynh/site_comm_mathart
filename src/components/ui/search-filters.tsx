@@ -33,7 +33,7 @@ const defaultFilters: FilterState = {
 export function SearchFilters({ onFiltersChange, categories, authors }: SearchFiltersProps) {
   const [filters, setFilters] = useState<FilterState>(defaultFilters);
   const [showFilters, setShowFilters] = useState(false);
-  const searchTimeoutRef = useRef<NodeJS.Timeout>();
+  const searchTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   const handleFilterChange = useCallback((key: keyof FilterState, value: string) => {
     const newFilters = { ...filters, [key]: value };
@@ -59,7 +59,7 @@ export function SearchFilters({ onFiltersChange, categories, authors }: SearchFi
   }, [onFiltersChange]);
 
   const toggleSortOrder = useCallback(() => {
-    const newSortOrder = filters.sortOrder === 'asc' ? 'desc' : 'asc';
+    const newSortOrder: 'asc' | 'desc' = filters.sortOrder === 'asc' ? 'desc' : 'asc';
     const newFilters = { ...filters, sortOrder: newSortOrder };
     setFilters(newFilters);
     onFiltersChange(newFilters);

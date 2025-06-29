@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { LogOut, Settings, Plus, Shield, FileText } from "lucide-react";
+import { LogOut, Settings, Plus } from "lucide-react";
 import { Session } from "next-auth";
 
 interface NavigationProps {

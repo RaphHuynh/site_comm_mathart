@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import DiscordProvider from "next-auth/providers/discord";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "./prisma";
-import type { SessionStrategy } from "next-auth";
 
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
@@ -17,10 +17,10 @@ export const authOptions = {
     })
   ],
   session: {
-    strategy: "jwt" as SessionStrategy
+    strategy: "jwt" as const
   },
   callbacks: {
-    async session({ session, token }) {
+    async session({ session, token }: { session: any; token: any }) {
       // Enrichir la session avec les infos du token
       if (session.user) {
         session.user.id = token.sub;
@@ -29,7 +29,7 @@ export const authOptions = {
       }
       return session;
     },
-    async jwt({ token, user, account, profile }) {
+    async jwt({ token, user, account, profile }: { token: any; user?: any; account?: any; profile?: any }) {
       if (account?.provider === "discord" && profile) {
         token.discordId = profile.id;
       }

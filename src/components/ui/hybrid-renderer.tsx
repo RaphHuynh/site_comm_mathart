@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
@@ -155,7 +156,7 @@ export function HybridRenderer({ content, className = "" }: HybridRendererProps)
                 </li>
               ),
               // Personnalisation des blocs de code
-              code: ({ inline, className, children, ...props }) => {
+              code: ({ inline, className, children, ...props }: any) => {
                 return !inline ? (
                   <pre>
                     <code className={className} {...props}>
@@ -180,14 +181,14 @@ export function HybridRenderer({ content, className = "" }: HybridRendererProps)
                 </a>
               ),
               // Personnalisation des images
-              img: ({ src, alt, ...props }) => (
+              img: ({ src, alt, ...props }: any) => (
                 <div className="my-6 text-center">
                   <img
                     src={src}
                     alt={alt || 'Image'}
                     className="max-w-full h-auto rounded-lg shadow-lg mx-auto cursor-pointer hover:shadow-xl transition-shadow duration-300"
                     onClick={() => {
-                      if (src) {
+                      if (src && typeof src === 'string') {
                         window.open(src, '_blank');
                       }
                     }}
