@@ -46,8 +46,8 @@ export default function AdminArticles() {
           const uniqueCategories = [...new Set(data.map((article: Article) => article.category.name))];
           const uniqueAuthors = [...new Set(data.map((article: Article) => article.author.name))];
           
-          setCategories(uniqueCategories);
-          setAuthors(uniqueAuthors);
+          setCategories(uniqueCategories as string[]);
+          setAuthors(uniqueAuthors as string[]);
         }
       } catch (error) {
         console.error("Erreur lors du chargement des articles:", error);
@@ -95,8 +95,7 @@ export default function AdminArticles() {
 
     // Tri
     filteredData.sort((a, b) => {
-      let aValue: unknown, bValue: unknown;
-      
+      let aValue: string | Date, bValue: string | Date;
       switch (filters.sortBy) {
         case 'title':
           aValue = a.title.toLowerCase();

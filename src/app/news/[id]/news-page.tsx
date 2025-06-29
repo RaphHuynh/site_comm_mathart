@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Navigation } from "@/components/layout/Navigation";
 import { HybridRenderer } from "@/components/ui/hybrid-renderer";
 import { ArrowLeft, Edit, Trash2, Calendar, User, Loader2 } from "lucide-react";
+import { Session } from "next-auth";
 
 interface News {
   id: number;
@@ -150,7 +151,7 @@ export default function NewsPage({ params }: { params: { id: string } }) {
               </div>
 
               {/* Actions pour les admins */}
-              {session?.user?.isAdmin && (
+              {(session?.user && (session.user as Session["user"]).isAdmin) && (
                 <div className="flex items-center space-x-2 ml-4">
                   <Link href={`/admin/news/${news.id}/edit`}>
                     <Button variant="outline" size="sm">

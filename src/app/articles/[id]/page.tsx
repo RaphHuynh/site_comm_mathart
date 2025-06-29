@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
@@ -17,6 +17,7 @@ import {
   Tag,
   EyeOff
 } from 'lucide-react';
+import { Session } from "next-auth";
 
 interface Article {
   id: number;
@@ -49,11 +50,7 @@ export default function ArticlePage() {
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
 
-  useEffect(() => {
-    fetchArticle();
-  }, [params.id]);
-
-  const fetchArticle = async () => {
+  const fetchArticle = useCallback(async () => {
     try {
       const response = await fetch(`/api/articles/${params.id}`);
       if (response.ok) {
@@ -69,7 +66,11 @@ export default function ArticlePage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [params.id, router]);
+
+  useEffect(() => {
+    fetchArticle();
+  }, [fetchArticle]);
 
   const handleDelete = async () => {
     if (!confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
@@ -98,8 +99,8 @@ export default function ArticlePage() {
   };
 
   const canEdit = session?.user && (
-    article?.author.id === session.user.id || 
-    session.user.isAdmin
+    article?.author.id === (session.user as Session["user"]).id ||
+    (session.user as Session["user"]).isAdmin
   );
 
   if (loading) {

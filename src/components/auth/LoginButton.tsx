@@ -12,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { LogOut, User, Shield } from "lucide-react";
+import { Session } from "next-auth";
 
 export function LoginButton() {
   const { data: session, status } = useSession();
@@ -49,7 +50,7 @@ export function LoginButton() {
               <p className="text-xs leading-none text-muted-foreground">
                 {session.user.email}
               </p>
-              {session.user.isAdmin && (
+              {(session.user && (session.user as Session["user"]).isAdmin) && (
                 <div className="flex items-center gap-1 text-xs text-blue-600">
                   <Shield className="h-3 w-3" />
                   Administrateur
@@ -64,7 +65,7 @@ export function LoginButton() {
               Mon Profil
             </a>
           </DropdownMenuItem>
-          {session.user.isAdmin && (
+          {session.user && (session.user as Session["user"]).isAdmin && (
             <DropdownMenuItem asChild>
               <a href="/admin" className="flex items-center gap-2">
                 <Shield className="h-4 w-4" />

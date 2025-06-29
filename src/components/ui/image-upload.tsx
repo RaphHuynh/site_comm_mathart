@@ -120,11 +120,6 @@ export function ImageUpload({
     });
   };
 
-  const handleImagesChange = (newImages: UploadedImage[]) => {
-    setImages(newImages);
-    onImagesChange(newImages.map(img => img.url));
-  };
-
   return (
     <div className="space-y-4">
       {/* Zone de drop */}

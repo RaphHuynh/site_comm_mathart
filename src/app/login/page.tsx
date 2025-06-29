@@ -5,18 +5,15 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Navigation } from "@/components/layout/Navigation";
-import { MessageCircle, AlertCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const callbackUrl = searchParams.get("callbackUrl") || "/";
-  const errorParam = searchParams.get("error");
 
   useEffect(() => {
     // Vérifier si l'utilisateur est déjà connecté
@@ -25,25 +22,10 @@ export default function LoginPage() {
         router.push(callbackUrl);
       }
     });
-
-    // Afficher les erreurs d'authentification
-    if (errorParam) {
-      switch (errorParam) {
-        case "Callback":
-          setError("Erreur lors de la connexion. Veuillez réessayer.");
-          break;
-        case "AccessDenied":
-          setError("Accès refusé. Veuillez autoriser l'accès à votre compte Discord.");
-          break;
-        default:
-          setError("Une erreur s'est produite lors de la connexion.");
-      }
-    }
-  }, [router, callbackUrl, errorParam]);
+  }, [router, callbackUrl]);
 
   const handleDiscordLogin = async () => {
     setIsLoading(true);
-    setError(null);
     
     try {
       const result = await signIn("discord", {
@@ -51,13 +33,11 @@ export default function LoginPage() {
         redirect: false,
       });
 
-      if (result?.error) {
-        setError("Erreur lors de la connexion. Veuillez réessayer.");
-      } else if (result?.ok) {
+      if (result?.ok) {
         router.push(callbackUrl);
       }
     } catch (error) {
-      setError("Une erreur inattendue s'est produite.");
+      console.error("Erreur de connexion:", error);
     } finally {
       setIsLoading(false);
     }
@@ -79,13 +59,6 @@ export default function LoginPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {error && (
-              <Alert variant="destructive">
-                <AlertCircle className="h-4 w-4" />
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
-
             <Button
               onClick={handleDiscordLogin}
               disabled={isLoading}

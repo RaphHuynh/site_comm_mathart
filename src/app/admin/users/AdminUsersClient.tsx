@@ -7,13 +7,13 @@ import { useState } from 'react';
 
 interface User {
   id: string;
-  name: string;
-  email: string;
+  name: string | null;
+  email: string | null;
   image: string | null;
   discordId: string | null;
   isAdmin: boolean;
   isBanned: boolean;
-  createdAt: string;
+  createdAt: Date;
   _count: {
     articles: number;
     news: number;

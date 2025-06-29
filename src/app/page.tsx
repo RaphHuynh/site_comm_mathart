@@ -238,7 +238,7 @@ export default async function HomePage() {
                     </p>
                     <div className="flex items-center space-x-2 mb-3">
                       <Avatar className="h-6 w-6">
-                        <AvatarImage src={article.author.image || ""} alt={article.author.name} />
+                        <AvatarImage src={article.author.image || ""} alt={article.author.name || ""} />
                         <AvatarFallback className="text-xs">
                           {article.author.name?.charAt(0).toUpperCase()}
                         </AvatarFallback>
@@ -248,7 +248,7 @@ export default async function HomePage() {
                     <Link href={`/articles/${article.id}`}>
                       <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 group-hover:shadow-lg transition-all duration-300 mt-2">
                         <FileText className="mr-2 h-4 w-4" />
-                        Lire l'article
+                        Lire l&apos;article
                         <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                       </Button>
                     </Link>

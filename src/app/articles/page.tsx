@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Navigation } from "@/components/layout/Navigation";
 import { SearchFilters, FilterState } from "@/components/ui/search-filters";
 import { Calendar, User, Tag, Eye, FileText, Loader2, ArrowRight } from "lucide-react";
+import { Session } from "next-auth";
 
 interface Article {
   id: number;
@@ -255,7 +256,7 @@ export default function ArticlesPage() {
                 <h3 className="text-lg font-medium text-gray-900 mb-2">Aucun article trouvé</h3>
                 <p className="text-gray-500 mb-6">Essayez de modifier vos critères de recherche</p>
                 <Badge className="bg-blue-100 text-blue-800">
-                  Recherche d'articles
+                  Recherche d&apos;articles
                 </Badge>
               </div>
             </CardContent>
@@ -314,7 +315,7 @@ export default function ArticlesPage() {
                   <Link href={`/articles/${article.id}`}>
                     <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 group-hover:shadow-lg transition-all duration-300 mt-2">
                       <Eye className="mr-2 h-4 w-4" />
-                      Lire l'article
+                      Lire l&apos;article
                       <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
@@ -332,14 +333,14 @@ export default function ArticlesPage() {
                 Découvrez nos articles
               </h3>
               <p className="text-gray-600 mb-6 text-lg">
-                Explorez notre collection d'articles passionnants pour enrichir vos connaissances.
+                Explorez notre collection d&apos;articles passionnants pour enrichir vos connaissances.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Badge className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-0 px-6 py-2 text-base">
                   <FileText className="mr-2 h-4 w-4" />
                   Articles récents
                 </Badge>
-                {session?.user?.isAdmin && (
+                {(session?.user && (session.user as Session["user"]).isAdmin) && (
                   <Link href="/admin/articles">
                     <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
                       Gérer les articles

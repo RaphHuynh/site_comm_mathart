@@ -100,7 +100,7 @@ export function FeaturedImageUpload({
               </button>
             </div>
             <p className="text-sm text-gray-600 mt-2">
-              Image principale de l'article
+              Image principale de l&apos;article
             </p>
           </CardContent>
         </Card>
@@ -124,7 +124,7 @@ export function FeaturedImageUpload({
               <input {...getInputProps()} />
               <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
               {isDragActive ? (
-                <p className="text-blue-600">Déposez l'image ici...</p>
+                <p className="text-blue-600">Déposez l&apos;image ici...</p>
               ) : (
                 <div>
                   <p className="text-gray-600 mb-2">

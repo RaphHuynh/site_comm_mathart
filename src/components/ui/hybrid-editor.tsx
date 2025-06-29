@@ -139,7 +139,6 @@ export function HybridEditor({ content, onChange, placeholder = "Commencez à é
         if (textareaRef.current) {
           const textarea = textareaRef.current;
           const start = textarea.selectionStart;
-          const selectedText = content.substring(start, textarea.selectionEnd);
           
           // Créer le texte Markdown pour l'image
           const imageText = `![${file.name.replace(/\.[^/.]+$/, '')}](${data.url})`;
@@ -302,7 +301,7 @@ export function HybridEditor({ content, onChange, placeholder = "Commencez à é
           size="sm"
           onClick={() => fileInputRef.current?.click()}
           disabled={uploading}
-          title="Upload d'image"
+          title="Upload d&apos;image"
         >
           <Upload className="h-4 w-4" />
         </Button>
@@ -365,7 +364,7 @@ export function HybridEditor({ content, onChange, placeholder = "Commencez à é
       {showHelp && (
         <Card className="border-t-0 rounded-none">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm">Guide d'utilisation</CardTitle>
+            <CardTitle className="text-sm">Guide d&apos;utilisation</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">

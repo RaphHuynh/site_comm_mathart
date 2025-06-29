@@ -132,7 +132,7 @@ export default function NewArticlePage() {
             {/* Titre */}
             <Card>
               <CardHeader>
-                <CardTitle>Titre de l'article</CardTitle>
+                <CardTitle>Titre de l&apos;article</CardTitle>
               </CardHeader>
               <CardContent>
                 <Input

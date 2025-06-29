@@ -5,14 +5,15 @@ import { prisma } from "@/lib/prisma";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user || !session.user.isAdmin) {
       return NextResponse.redirect("/admin/users?error=Accès%20réservé%20aux%20administrateurs");
     }
-    const userId = params.id;
+    const { id } = await params;
+    const userId = id;
     const user = await prisma.user.findUnique({ where: { id: userId } });
     if (!user) {
       return NextResponse.redirect("/admin/users?error=Utilisateur%20non%20trouvé");

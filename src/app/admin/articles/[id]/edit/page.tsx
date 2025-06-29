@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +12,7 @@ import { HybridEditor } from "@/components/ui/hybrid-editor";
 import { FeaturedImageUpload } from "@/components/ui/featured-image-upload";
 import { useSession } from "next-auth/react";
 import { Loader2, Save, ArrowLeft } from "lucide-react";
+import { Session } from "next-auth";
 
 interface Category {
   id: number;
@@ -49,10 +50,9 @@ export default function EditArticlePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const params = useParams();
-  const [loading] = useState(false);
-  const [saving, setSaving] = useState(false);
   const [article, setArticle] = useState<Article | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     content: "",
@@ -63,20 +63,7 @@ export default function EditArticlePage() {
     published: false,
   });
 
-  useEffect(() => {
-    if (status === "loading") return;
-    
-    if (!session?.user) {
-      router.push("/login");
-      return;
-    }
-
-    // Charger l'article et les catégories
-    fetchArticle();
-    fetchCategories();
-  }, [session, status, router, params.id, fetchArticle]);
-
-  const fetchArticle = async () => {
+  const fetchArticle = useCallback(async () => {
     try {
       const response = await fetch(`/api/articles/${params.id}`);
       if (response.ok) {
@@ -99,9 +86,9 @@ export default function EditArticlePage() {
       console.error("Erreur lors du chargement de l'article:", error);
       alert("Erreur lors du chargement de l'article");
     }
-  };
+  }, [params.id, router]);
 
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback(async () => {
     try {
       const response = await fetch("/api/categories?activeOnly=true");
       if (response.ok) {
@@ -111,7 +98,14 @@ export default function EditArticlePage() {
     } catch (error) {
       console.error("Erreur lors du chargement des catégories:", error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (status === "authenticated" && (session?.user as Session["user"])?.isAdmin) {
+      fetchArticle();
+      fetchCategories();
+    }
+  }, [session, status, fetchArticle, fetchCategories]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -157,7 +151,7 @@ export default function EditArticlePage() {
     }));
   };
 
-  if (status === "loading" || loading) {
+  if (status === "loading") {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <Loader2 className="h-8 w-8 animate-spin" />
@@ -184,7 +178,7 @@ export default function EditArticlePage() {
           <ArrowLeft className="h-4 w-4" />
           Retour
         </Button>
-        <h1 className="text-3xl font-bold">Modifier l'article</h1>
+        <h1 className="text-3xl font-bold">Modifier l&apos;article</h1>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -194,11 +188,11 @@ export default function EditArticlePage() {
             {/* Titre */}
             <Card>
               <CardHeader>
-                <CardTitle>Titre de l'article</CardTitle>
+                <CardTitle>Titre de l&apos;article</CardTitle>
               </CardHeader>
               <CardContent>
                 <Input
-                  placeholder="Entrez le titre de l'article..."
+                  placeholder="Entrez le titre de l&apos;article..."
                   value={formData.title}
                   onChange={(e) => handleInputChange("title", e.target.value)}
                   required
@@ -230,7 +224,7 @@ export default function EditArticlePage() {
               </CardHeader>
               <CardContent>
                 <Input
-                  placeholder="Un bref résumé de l'article..."
+                  placeholder="Un bref résumé de l&apos;article..."
                   value={formData.excerpt}
                   onChange={(e) => handleInputChange("excerpt", e.target.value)}
                 />

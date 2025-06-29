@@ -1,7 +1,7 @@
-import NextAuth from "next-auth";
 import DiscordProvider from "next-auth/providers/discord";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "./prisma";
+import type { SessionStrategy } from "next-auth";
 
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
@@ -17,7 +17,7 @@ export const authOptions = {
     })
   ],
   session: {
-    strategy: "jwt"
+    strategy: "jwt" as SessionStrategy
   },
   callbacks: {
     async session({ session, token }) {
@@ -41,14 +41,10 @@ export const authOptions = {
     }
   },
   events: {
-    async createUser({ user, account, profile }) {
-      if (account?.provider === "discord" && profile?.id) {
-        // Mettre à jour l'utilisateur avec le discordId
-        await prisma.user.update({
-          where: { id: user.id },
-          data: { discordId: profile.id }
-        });
-      }
+    async createUser() {
+      // Mettre à jour l'utilisateur avec le discordId si nécessaire
+      // Note: account et profile ne sont pas disponibles dans cet événement
+      // Le discordId sera mis à jour via le callback jwt
     }
   },
   pages: {

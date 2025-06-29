@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { LogOut, Settings, Plus } from "lucide-react";
+import { LogOut, Settings, Plus, Shield, FileText } from "lucide-react";
+import { Session } from "next-auth";
 
 interface NavigationProps {
   showCreateButton?: boolean;
@@ -78,7 +79,7 @@ export function Navigation({ showCreateButton = false, createButtonHref = "", cr
           <div className="flex items-center space-x-4">
             {session ? (
               <>
-                {showCreateButton && session.user?.isAdmin && (
+                {showCreateButton && session.user && (session.user as Session["user"]).isAdmin && (
                   <Link href={createButtonHref}>
                     <Button size="sm" variant="outline">
                       <Plus className="mr-2 h-4 w-4" />
@@ -104,7 +105,7 @@ export function Navigation({ showCreateButton = false, createButtonHref = "", cr
                         <p className="text-xs leading-none text-muted-foreground">
                           {session.user?.email}
                         </p>
-                        {session.user?.isAdmin && (
+                        {session.user && (session.user as Session["user"]).isAdmin && (
                           <p className="text-xs leading-none text-blue-600 font-medium">
                             Administrateur
                           </p>
@@ -112,7 +113,7 @@ export function Navigation({ showCreateButton = false, createButtonHref = "", cr
                       </div>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    {session.user?.isAdmin && (
+                    {session.user && (session.user as Session["user"]).isAdmin && (
                       <DropdownMenuItem asChild>
                         <Link href="/admin">
                           <Settings className="mr-2 h-4 w-4" />

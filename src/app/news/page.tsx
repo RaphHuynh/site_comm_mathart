@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Navigation } from "@/components/layout/Navigation";
 import { Plus, Newspaper, Calendar, User as UserIcon, Loader2, ArrowRight, Clock } from "lucide-react";
+import { Session } from "next-auth";
 
 interface News {
   id: number;
@@ -149,11 +150,11 @@ export default function NewsPage() {
                 <p className="text-gray-500 mb-6">
                   Aucune actualité n&apos;a encore été publiée.
                 </p>
-                {session?.user?.isAdmin && (
+                {(session?.user && (session.user as Session["user"]).isAdmin) && (
                   <Link href="/admin/news/new">
                     <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700">
                       <Plus className="mr-2 h-4 w-4" />
-                      Créer la première actualité
+                      Nouvelle actualité
                     </Button>
                   </Link>
                 )}
@@ -244,7 +245,7 @@ export default function NewsPage() {
                   <Newspaper className="mr-2 h-4 w-4" />
                   Actualités récentes
                 </Badge>
-                {session?.user?.isAdmin && (
+                {(session?.user && (session.user as Session["user"]).isAdmin) && (
                   <Link href="/admin/news/new">
                     <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
                       <Plus className="mr-2 h-4 w-4" />

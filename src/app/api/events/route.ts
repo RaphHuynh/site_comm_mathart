@@ -79,9 +79,9 @@ export async function POST(request: NextRequest) {
     });
     return NextResponse.json(event, { status: 201 });
   } catch (error) {
-    console.error("Erreur lors de la création de l'événement:", error, error?.stack);
+    console.error("Erreur lors de la création de l'événement:", error, (error as Error)?.stack);
     return NextResponse.json(
-      { error: error?.message || "Erreur lors de la création de l'événement" },
+      { error: (error as Error)?.message || "Erreur lors de la création de l'événement" },
       { status: 500 }
     );
   }

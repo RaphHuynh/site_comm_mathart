@@ -5,53 +5,29 @@ import { prisma } from "@/lib/prisma";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
-
-    if (!session) {
-      return NextResponse.json(
-        { error: "Non autorisé" },
-        { status: 401 }
-      );
+    if (!session?.user || !session.user.isAdmin) {
+      return NextResponse.redirect("/admin/users?error=Accès%20réservé%20aux%20administrateurs");
     }
-
-    // Vérifier si l'utilisateur actuel est admin
-    const currentUser = await prisma.user.findUnique({
-      where: { id: session.user.id },
-    });
-
-    if (!currentUser?.isAdmin) {
-      return NextResponse.json(
-        { error: "Accès refusé - Admin requis" },
-        { status: 403 }
-      );
+    const { id } = await params;
+    const userId = id;
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+    if (!user) {
+      return NextResponse.redirect("/admin/users?error=Utilisateur%20non%20trouvé");
     }
-
-    // Empêcher de se rétrograder soi-même
-    if (params.id === session.user.id) {
-      return NextResponse.json(
-        { error: "Vous ne pouvez pas vous rétrograder vous-même" },
-        { status: 400 }
-      );
+    if (!user.isAdmin) {
+      return NextResponse.redirect("/admin/users?error=Cet%20utilisateur%20n%27est%20pas%20administrateur");
     }
-
-    // Rétrograder l'utilisateur
-    const updatedUser = await prisma.user.update({
-      where: { id: params.id },
+    await prisma.user.update({
+      where: { id: userId },
       data: { isAdmin: false },
     });
-
-    return NextResponse.json({ 
-      message: "Utilisateur rétrogradé avec succès",
-      user: updatedUser 
-    });
+    return NextResponse.redirect("/admin/users?success=Utilisateur%20rétrogradé");
   } catch (error) {
     console.error("Erreur lors de la rétrogradation:", error);
-    return NextResponse.json(
-      { error: "Erreur lors de la rétrogradation" },
-      { status: 500 }
-    );
+    return NextResponse.redirect("/admin/users?error=Erreur%20lors%20de%20la%20rétrogradation");
   }
 } 

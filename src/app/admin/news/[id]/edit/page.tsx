@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,8 +23,9 @@ interface News {
   };
 }
 
-export default function EditNewsPage({ params }: { params: { id: string } }) {
+export default function EditNewsPage() {
   const router = useRouter();
+  const params = useParams();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [news, setNews] = useState<News | null>(null);
@@ -143,7 +144,7 @@ export default function EditNewsPage({ params }: { params: { id: string } }) {
           <div className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle>Informations de l'actualité</CardTitle>
+                <CardTitle>Informations de l&apos;actualité</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
